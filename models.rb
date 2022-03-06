@@ -9,3 +9,5 @@ class User < ActiveRecord::Base
         length: {in: 5..15}
 end
 
+class Sento < ActiveRecord::Base
+end

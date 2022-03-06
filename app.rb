@@ -1,7 +1,7 @@
 # myapp.rb
 require 'sinatra'
 require './models'
-enable :session
+enable :sessions
 
 helpers do
     def current_user
@@ -45,6 +45,14 @@ end
 
 get '/main' do
     erb :main
+end
+
+get '/sento/add' do
+    erb :sento_add
+end
+
+post '/sento/:id/add' do
+    
 end
 
 get '/logout' do
