@@ -35,6 +35,14 @@ post '/signup' do
     redirect '/signup'
 end
 
+post '/login' do
+    user = User.find_by(name: params[:name])
+     if user && user.authenticate(params[:password])
+         session[:user] = user.id
+     end
+     redirect '/main'
+end
+
 get '/main' do
     erb :main
 end
