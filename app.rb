@@ -46,3 +46,8 @@ end
 get '/main' do
     erb :main
 end
+
+get '/logout' do
+    session[:user] = nil
+    redirect '/'
+end
