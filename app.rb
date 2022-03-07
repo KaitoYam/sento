@@ -39,11 +39,13 @@ post '/login' do
     user = User.find_by(name: params[:name])
      if user && user.authenticate(params[:password])
          session[:user] = user.id
+         redirect '/main'
      end
-     redirect '/main'
+    redirect '/'
 end
 
 get '/main' do
+    @sento = Sento.all
     erb :main
 end
 
@@ -52,7 +54,44 @@ get '/sento/add' do
 end
 
 post '/sento/:id/add' do
+    sento = Sento.create(
+        name: params[:name],
+        osusume: params[:osusume],
+        homepage_url: params[:homepage_url],
+        map_url: params[:map_url],
+        open_time: params[:open_time],
+        cost: params[:cost]
+    )
+    if sento.persisted?
+        redirect '/main'
+    end
+    redirect '/sento/add'
+end
+
+get '/mypage' do
+   erb :my_page 
+end
+
+get '/post' do 
+    @post = Post.all
+    erb :post_list
+end
     
+get '/post/:user_id/add' do
+    @sento = Sento.all
+    erb :post_add
+end
+
+post '/post/:user_id/add' do
+    post = Post.create(
+        comment: params[:comment],
+        sento_id: params[:sento],
+        user_id: :user_id
+    )
+    if post.persisted?
+        redirect '/post'
+    end
+    redirect 'post/:user_id/add'
 end
 
 get '/logout' do

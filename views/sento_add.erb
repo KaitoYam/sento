@@ -1,12 +1,17 @@
 <div>
-    <form action="/sento/<%= session[:user] %>/add" method="post">
-        <input type="text" name="name"><br>
-        <input type="text" name="osusume"><br>
-        <input type="text" name="homepage_url">
-        <input type="text" name="map_url">
-        <input type="open_time" name="string">
-        <input type="">
-        <input>
-        <input>
+    <h1>newSento</h1>
+    <form action="/sento/<%= current_user.id %>/add" method="post">
+        銭湯の名前<input type="text" name="name"><br>
+        おすすめポイント<input type="text" name="osusume"><br>
+        HPのURL<input type="text" name="homepage_url"><br>
+        GoogleMapsのURL<input type="text" name="map_url"><br>
+        営業時間<input type="text" name="open_time"><br>
+        費用<select name="cost">
+                <option>~500円</option>
+                <option>500~1000円</option>
+                <option>1000~2000円</option>
+                <option>2000円~</option>
+            </select><br>
+        <input type="submit" value="登録" >
     </form>
 </div>

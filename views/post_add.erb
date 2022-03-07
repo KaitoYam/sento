@@ -1,0 +1,15 @@
+<div>
+    <h1>newPost</h1>
+        <form action="/post/:user_id/add" method="post">
+            <% if !@sento.nil? %>
+                <% @sento.each do |sento| %>
+                    <div>
+                      <input type="radio" id="<%= sento.id %>" name="sento" value="<%= sento.id %>" checked>
+                      <label for="<%= sento.id %>"><%= sento.name %></label>
+                    </div>
+                <% end %>
+            <% end %>
+            ひとこと<input type="text" name="comment"><br>
+            <input type="submit" value="投稿">
+        </form>
+</div>

@@ -11,3 +11,18 @@ end
 
 class Sento < ActiveRecord::Base
 end
+
+class Post < ActiveRecord::Base
+end
+
+class Image < ActiveRecord::Base
+end
+
+class Movie < ActiveRecord::Base
+end
+
+class LikeSento < ActiveRecord::Base
+end
+
+class LikePost < ActiveRecord::Base
+end

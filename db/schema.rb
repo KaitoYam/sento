@@ -10,10 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_06_122222) do
+ActiveRecord::Schema.define(version: 2022_03_07_023936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "images", force: :cascade do |t|
+    t.integer "sento_id"
+    t.integer "post_id"
+    t.integer "user_id"
+    t.string "url"
+  end
+
+  create_table "like_posts", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+  end
+
+  create_table "like_sentos", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "sento_id"
+  end
+
+  create_table "moives", force: :cascade do |t|
+    t.integer "sento_id"
+    t.integer "post_id"
+    t.integer "user_id"
+    t.string "url"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "comment"
+    t.integer "sento_id"
+    t.integer "user_id"
+  end
 
   create_table "sentos", force: :cascade do |t|
     t.integer "user_id"
