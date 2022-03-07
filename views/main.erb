@@ -12,6 +12,9 @@
                 <p>費用｜<%= sento.cost %></p>
                 <p>営業時間｜<%= sento.open_time %></p>
                 <p>おすすめ｜<%= sento.osusume %></p>
+                <form action="/sento/<%= sento.id %>/delete" method="post">
+                    <input type="submit" value="削除">
+                </form>
             </div>
         <% end %>
     <% end %>

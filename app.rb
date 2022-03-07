@@ -94,6 +94,12 @@ post '/post/:user_id/add' do
     redirect 'post/:user_id/add'
 end
 
+post '/sento/:sento_id/delete' do
+    sento = Sento.find(params[:sento_id])
+    sento.destroy
+    redirect '/main'
+end
+
 get '/logout' do
     session[:user] = nil
     redirect '/'
