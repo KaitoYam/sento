@@ -9,6 +9,8 @@ gem 'activerecord', '~> 6.1'
 gem 'pg', '~> 1.2'
 gem 'rake', '~>13.0'
 gem 'bcrypt'
+gem 'dotenv'
+gem 'google_places'
 
 group :development do
   gem 'debase'

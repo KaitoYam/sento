@@ -2,6 +2,8 @@
 require 'sinatra'
 require './models'
 enable :sessions
+Dotenv.load
+client = GooglePlaces::Client.new ENV['API_KEY']
 
 helpers do
     def current_user
@@ -10,6 +12,9 @@ helpers do
 end
 
 get '/' do
+  client.spots(34.7055051, 135.4983028).each do |spot|
+      puts spot.name
+  end
   erb :index
 end
 
