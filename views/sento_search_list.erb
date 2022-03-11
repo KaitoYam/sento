@@ -1,0 +1,17 @@
+<div>
+    <h1>newSento</h1>
+    <p>銭湯の名前でっっす</p>
+    <form action="/sento/search/list" method="get">
+        <input type="text" name="name" >
+        <input type="submit" value="検索">
+    </form>
+        <% @client.each do |place| %>
+            <div>
+                <!--これは表示される-->
+                <p><%= place.name %></p>
+                
+                <!--こっちで該当のエラーが出る-->
+                <p><%= place.photos[0].fetch_url(800) %></p>
+            </div>
+        <% end %>
+</div>

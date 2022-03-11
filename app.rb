@@ -12,10 +12,15 @@ helpers do
 end
 
 get '/' do
-  client.spots(34.7055051, 135.4983028).each do |spot|
-      puts spot.name
-  end
+#   client.spots(34.7055051, 135.4983028).each do |spot|
+#       puts spot.name
+#   end
   erb :index
+end
+
+get '/sento/search/list' do
+    @client = client.spots(34.7055051, 135.4983028, :language => 'ja', :name => params[:name])
+    erb :sento_search_list
 end
 
 get '/signup' do
@@ -86,6 +91,16 @@ get '/post/:user_id/add' do
     @sento = Sento.all
     erb :post_add
 end
+
+get '/sento/search' do
+    erb :sento_search
+end
+
+
+# post 'sento/search' do
+#     @client = client
+#     redirect '/post/search'
+# end
 
 post '/post/:user_id/add' do
     post = Post.create(
