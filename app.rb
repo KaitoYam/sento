@@ -96,9 +96,10 @@ get '/main' do
     # request = Net::HTTP::Get.new(url)
     # response = https.request(request)
     # puts response.read_body
+    p params[:lat]
+    p params[:lon]
 
-
-    url = URI("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+params[:lat]+"%2c"+params[:lon]+"&destinations=place_id:ChIJkY4i9-aMGGAREeJTfchRKao&key=AIzaSyA06isUJXgeAyaZoQ7XNsiKQezLaSsb3rM")
+    url = URI("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+params[:lat]+"%2c"+params[:lon]+"&destinations=place_id:ChIJkY4i9-aMGGAREeJTfchRKao&key="+ENV['API_KEY'])
     
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
