@@ -8,7 +8,7 @@
         <% @sento.each do |sento| %>
             <div class="sento_container">
                 <h3><%= sento.name %></h3>
-                <p>ここから〇〇分!!</p>
+                <p>ここから<%= @elements %>!!</p>
                 <p>費用｜<%= sento.cost %></p>
                 <p>営業時間｜<%= sento.open_time %></p>
                 <p>おすすめ｜<%= sento.osusume %></p>

@@ -3,7 +3,7 @@ require 'sinatra'
 require './models'
 require 'json'
 require 'uri'
-require '/net/http'
+require 'net/http'
 enable :sessions
 Dotenv.load
 client = GooglePlaces::Client.new ENV['API_KEY']
@@ -29,15 +29,24 @@ get '/sento/search/list' do
     p 11111111111111111111
     p 11111111111111111111
     p 11111111111111111111
-    p params[:lat]
-    p params[:lon]
-    p @client
+    
     @client.each do |c|
-        c.photos.each do |photo|
-            p photo.photo_reference
-        end
+        puts c.place_id
     end
     
+    uri = URI("https://maps.googleapis.com/maps/api/place/photo")
+    uri.query = URI.encode_www_form({
+        maxwidth: 100,
+        photo_reference: @client[0].photos[0].photo_reference,
+        key: ENV['API_KEY']
+    })
+    p uri
+    res = Net::HTTP.get_response(uri)
+    p res
+    
+    @res = res
+    # json = JSON.parse(res.body)
+    # p res
     erb :sento_search_list
 end
 
@@ -74,9 +83,37 @@ end
 
 get '/main' do
     @sento = Sento.all
+    
+    # uri = URI("https://maps.googleapis.com/maps/api/distancematrix/json")
+    # uri.query = URI.encode_www_form({
+    #     destinations: "Washington%2C%20DC",
+    #     origins: "New%20York%20City%2C%20NY",
+    #     unites: "imperial",
+    #     key: ENV['API_KEY']
+    # })
+    # https = Net::HTTP.new(url.host, url.port)
+    # https.use_ssl = true
+    # request = Net::HTTP::Get.new(url)
+    # response = https.request(request)
+    # puts response.read_body
+
+
+    url = URI("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+params[:lat]+"%2c"+params[:lon]+"&destinations=place_id:ChIJkY4i9-aMGGAREeJTfchRKao&key=AIzaSyA06isUJXgeAyaZoQ7XNsiKQezLaSsb3rM")
+    
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
+    
+    request = Net::HTTP::Get.new(url)
+    
+    response = https.request(request)
+    json = JSON.parse(response.read_body)
+    # puts json
+    # puts response.read_body
+    @elements = json["rows"][0]["elements"][0]["duration"]["text"]
+    puts json["rows"][0]["elements"][0]["duration"]["text"]
     erb :main
 end
-
+    
 get '/sento/add' do
     erb :sento_add
 end

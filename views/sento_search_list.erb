@@ -59,13 +59,14 @@
   <input type="text" name="name">
   <input type='submit' name='submit' value='検索' />
 </form>
-
+<div>
+</div>
 <% @client.each do |place| %>
     <div>
         <!--これは表示される-->
         <p><%= place.name %></p>
         <!--こっちで該当のエラーが出る-->
-        <% place.photos[0].fetch_url(100) %>
+
     </div>
 <% end %>
 
