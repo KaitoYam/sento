@@ -1,9 +1,13 @@
 # myapp.rb
 require 'sinatra'
 require './models'
+require 'json'
+require 'uri'
+require '/net/http'
 enable :sessions
 Dotenv.load
 client = GooglePlaces::Client.new ENV['API_KEY']
+
 
 helpers do
     def current_user
@@ -12,14 +16,28 @@ helpers do
 end
 
 get '/' do
-#   client.spots(34.7055051, 135.4983028).each do |spot|
-#       puts spot.name
-#   end
+    # navigator.geolocation.getCurrnentPosition(function (position){
+    #     LatLng = new gooel.maps.latLng(position.coords.latitude, position.coords.longitude);
+    #     p LatLng
+    # })
   erb :index
 end
 
 get '/sento/search/list' do
-    @client = client.spots(34.7055051, 135.4983028, :language => 'ja', :name => params[:name])
+    # @client = client.spots(params[:lat], params[:lon], :language => 'ja', :name => params[:name],  :radius => 10000)
+    @client = client.spots_by_query(params[:name], language: 'ja')
+    p 11111111111111111111
+    p 11111111111111111111
+    p 11111111111111111111
+    p params[:lat]
+    p params[:lon]
+    p @client
+    @client.each do |c|
+        c.photos.each do |photo|
+            p photo.photo_reference
+        end
+    end
+    
     erb :sento_search_list
 end
 

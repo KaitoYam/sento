@@ -11,6 +11,8 @@ gem 'rake', '~>13.0'
 gem 'bcrypt'
 gem 'dotenv'
 gem 'google_places'
+gem 'gon'
+gem 'geocoder'
 
 group :development do
   gem 'debase'
