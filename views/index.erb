@@ -55,14 +55,14 @@
 
 }
 </script>
-<div class = "container sento_container">
-    <div class="row">
-        <img src="/assets/img/title_SENTO.001.png" class="col-sm-6 col-lg-2 title_text"></img>
+<div class = "sento_container">
+    <div >
+        <img src="/assets/img/title_SENTO.001.png" class="title_text"></img>
         <form action="/login" method="post">
             <input type='hidden' id="lat" name='lat' value='' />
             <input type='hidden' id="lon" name='lon' value='' />
-            <input type="text" name="name" class="col-sm-6 col-lg-2 login_input"><br>
-            <input type="password" name="password" class="lcol-sm-6 col-lg-2 ogin_input"><br>
+            <input type="text" name="name" class="login_input"><br>
+            <input type="password" name="password" class="login_input"><br>
             <input type="submit" name='submit' value="ログイン" class="login_button">
         </form>
         <a href="/signup" class="to_sign_up_button">新規登録</a>
