@@ -35,9 +35,9 @@ body{
      width: 70%;
      height: 120px;
      border-radius:30px 30px 30px 30px;
-     border: none;     
+     border: none;    
+     margin-bottom: 50px;
 }
 .to_sign_up_button{
      font-size: 40px;
-     margin-top: 40px;
 }
