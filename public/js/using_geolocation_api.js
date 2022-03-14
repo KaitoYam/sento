@@ -8,10 +8,10 @@ if( navigator.geolocation )
 	function successFunc( position )
 	{
 		// 緯度をアラート表示
-		console.log( position.coords.latitude ) ;
+		console.log( position.coords.latitude );
 	
 		// 経度をアラート表示
-		console.log( position.coords.longitude ) ;
+		console.log( position.coords.longitude );
 	}
 	
 	// 失敗した時の関数

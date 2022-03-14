@@ -41,6 +41,7 @@ get '/sento/search/list' do
         key: ENV['API_KEY']
     })
     p uri
+    @uri = uri
     res = Net::HTTP.get_response(uri)
     p res
     
@@ -49,6 +50,18 @@ get '/sento/search/list' do
     # p res
     erb :sento_search_list
 end
+
+
+
+
+
+
+
+
+
+
+
+
 
 get '/signup' do
     erb :sign_up
@@ -74,6 +87,8 @@ end
 
 post '/login' do
     user = User.find_by(name: params[:name])
+    session[:lat] = params[:lat]
+    session[:lon] = params[:lon]
      if user && user.authenticate(params[:password])
          session[:user] = user.id
          redirect '/main'
@@ -83,7 +98,6 @@ end
 
 get '/main' do
     @sento = Sento.all
-    
     # uri = URI("https://maps.googleapis.com/maps/api/distancematrix/json")
     # uri.query = URI.encode_www_form({
     #     destinations: "Washington%2C%20DC",
@@ -96,11 +110,11 @@ get '/main' do
     # request = Net::HTTP::Get.new(url)
     # response = https.request(request)
     # puts response.read_body
-    p params[:lat]
-    p params[:lon]
-
-    url = URI("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+params[:lat]+"%2c"+params[:lon]+"&destinations=place_id:ChIJkY4i9-aMGGAREeJTfchRKao&key="+ENV['API_KEY'])
+    # json_geolocation = JSON.parse(res_geolocation.body)
+    # puts json_geolocation
     
+
+    url = URI("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+session[:lat]+"%2C"+session[:lon]+"&destinations=place_id:ChIJkY4i9-aMGGAREeJTfchRKao&key="+ENV['API_KEY'])
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
     
@@ -108,10 +122,10 @@ get '/main' do
     
     response = https.request(request)
     json = JSON.parse(response.read_body)
-    # puts json
+    puts json
     # puts response.read_body
-    @elements = json["rows"][0]["elements"][0]["duration"]["text"]
-    puts json["rows"][0]["elements"][0]["duration"]["text"]
+    # @elements = json["rows"][0]["elements"][0]["duration"]["text"]
+    # puts json["rows"][0]["elements"][0]["duration"]["text"]
     erb :main
 end
     
