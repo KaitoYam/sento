@@ -12,11 +12,19 @@ body{
      background-size: cover;
      height: 100vh;
 }
+.container{
+     margin: 0px auto;  
+     text-align: center;
+     background-color: #f8f4e6;
+     display:flex;
+     flex-direction:column;
+     align-items:center;
+}
 
 .title_text{
      width:40%;
-     margin-top: 150px;
-     margin-bottom: 170px
+     padding-top: 150px;
+     padding-bottom: 170px
 }
 
 .login_input{
@@ -81,7 +89,7 @@ body{
      position: fixed;
      bottom: 0px;
      width: 100%;
-     height: 10%;
+     height: 8%;
      background-color: #fff;
      display: flex;
 }
@@ -90,8 +98,83 @@ body{
      width:25%;
      height: 100%;
      background-color: #e45e32;
+     text-align: center;
 }
 .footer_icon{
-     width:  100px;
-     height: 100px;
+     height: 75%;
+     padding: 10%;
+}
+
+.page_title{
+     width:60%;
+     padding: 10%;
+}
+.wrap_sento_card{
+     width: 80%;
+     height: 100%;
+     margin: 5% auto 0;
+     background-color: rgba(255,255,255,0.5);
+     padding: 2.5%;
+     border-radius: 15px;
+     box-shadow: 5px 5px 20px grey;
+     text-align: left;
+}
+
+.sento_detail{
+     width: 100%;
+     height: 15vh;
+     display:flex;
+     text-align: left;
+     margin: 5px auto;
+
+}
+.wrap_sento_list{
+     width: 100%;
+     padding-bottom: 150px;
+}
+
+.wrap_sento_image{
+     background-color: #474a4d;
+     width: 50%;
+}
+
+.wrap_sento_text{
+     padding-left: 2.5%;
+}
+.sento_name{
+     font-size: 2.5rem;
+     margin-top: 1%;
+     margin-bottom:0;
+}
+
+.ps-2rem{
+     font-size: 2rem;
+     margin: 0px;
+}
+.ps-1_75rem{
+     font-size: 1.75rem;
+     margin: 0px;
+}
+
+.show_time{
+     font-weight:bold;
+     color: #e45e32;
+}
+
+.bold{
+     font-weight: bold;
+}
+
+.add_button{
+     position: fixed;
+     bottom: 10%;
+     right: 2%;
+}
+
+.add_icon{
+     width: 70%;
+}
+.add_button a {
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  cursor:pointer;
 }

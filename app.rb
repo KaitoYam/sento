@@ -15,6 +15,7 @@ helpers do
     end
 end
 
+
 get '/' do
     # navigator.geolocation.getCurrnentPosition(function (position){
     #     LatLng = new gooel.maps.latLng(position.coords.latitude, position.coords.longitude);

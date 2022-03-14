@@ -1,24 +1,40 @@
-<div class="sento_container">
-    <h1>お家に近いsento</h1>
-    
+<div class="container">
+    <img src="assets/img/sento_title.png" class="page_title"></img>
+    <div class="wrap_sento_list">
     <% if !@sento.nil? %>
         <% @sento.each do |sento| %>
-            <div>
-                <h3><%= sento.name %></h3>
-                <p>ここから<%= @elements %>!!</p>
-                <p>費用｜<%= sento.cost %></p>
-                <p>営業時間｜<%= sento.open_time %></p>
-                <p>おすすめ｜<%= sento.osusume %></p>
-                <form action="/sento/<%= sento.id %>/delete" method="post">
-                    <input type="submit" value="削除">
-                </form>
+            <div class="wrap_sento_card">
+                <h2 class="sento_name"><%= sento.name %></h2>
+                <p class="ps-2rem">移動時間｜<span class="show_time">00分<%= @elements %></span></p>
+                <div class="sento_detail">
+                    <div class="wrap_sento_image">
+                        
+                    </div>
+                    <div class="wrap_sento_text">
+                        <p class="ps-1_75rem"><span class="bold">費用</span><br>- <%= sento.cost %></p>
+                        <p class="ps-1_75rem"><span class="bold">営業時間</span><br>- <%= sento.open_time %></p>
+                    </div>
+                </div>
             </div>
+            <div class="wrap_sento_card">
+                <h2 class="sento_name"><%= sento.name %></h2>
+                <p class="ps-2rem">移動時間｜<span class="show_time">00分<%= @elements %></span></p>
+                <div class="sento_detail">
+                    <div class="wrap_sento_image">
+                        
+                    </div>
+                    <div class="wrap_sento_text">
+                        <p class="ps-1_75rem"><span class="bold">費用</span><br>- <%= sento.cost %></p>
+                        <p class="ps-1_75rem"><span class="bold">営業時間</span><br>- <%= sento.open_time %></p>
+                    </div>
+                </div>
+            </div>
+            
         <% end %>
     <% end %>
-    <div class="permanent_menu">
-        <a href="/sento/search" class="wrap_footer_icon"><img src="/assets/img/user_icon.png" class="footer_icon"></img></a>
-        <a href="/logout" class="wrap_footer_icon">ログアウト</a>
-        <a href="/mypage" class="wrap_footer_icon">マイページ</a>
-        <a href="/post" class="wrap_footer_icon">みんなのsento</a>
+        
+    </div>
+    <div class="add_button">
+        <a href="/sento/search"><img src="assets/img/add_icon.png" class="add_icon"></img></a>
     </div>
 </div>
