@@ -1,71 +1,32 @@
-<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-
-<script>
-    getLocation();
-    var x = document.getElementById("demo");
-    
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition,showError);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";}
-        }
-
-    function showPosition(position) {
-    
-        lat = position.coords.latitude;
-        lon = position.coords.longitude;
-        document.getElementById('lat').value = lat;
-        document.getElementById('lon').value = lon;
-    
-        latlon = new google.maps.LatLng(lat, lon)
-        mapholder = document.getElementById('mapholder')
-        mapholder.style.height='250px';
-        mapholder.style.width='500px';
-    
-        var myOptions={
-        center:latlon,zoom:14,
-        mapTypeId:google.maps.MapTypeId.ROADMAP,
-        mapTypeControl:false,
-        navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
-        }
-    
-        var map = new google.maps.Map(document.getElementById("mapholder"),myOptions);
-        var marker = new google.maps.Marker({position:latlon,map:map,title:"You are here!"});
-    
-    
-    }
-    function showError(error) {
-        switch(error.code) {
-            case error.PERMISSION_DENIED:
-                x.innerHTML = "User denied the request for Geolocation."
-                break;
-            case error.POSITION_UNAVAILABLE:
-                x.innerHTML = "Location information is unavailable."
-                break;
-            case error.TIMEOUT:
-                x.innerHTML = "The request to get user location timed out."
-                break;
-            case error.UNKNOWN_ERROR:
-                x.innerHTML = "An unknown error occurred."
-                break;
-        }
-
-}
-</script>
-<form action='/sento/search/list' method="get">
-  <input type='hidden' id="lat" name='lat' value='' />
-  <input type='hidden' id="lon" name='lon' value='' />
-  <input type="text" name="name">
-  <input type='submit' name='submit' value='検索' />
-</form>
-
-<% @client.each do |place| %>
-    <div>
-        <!--これは表示される-->
-        <p><%= place.name %></p>
-        <!--こっちで該当のエラーが出る-->
-        <img src="<%= @uri %>"></img>
+<div class="container">
+    <div class="wrap_sento_list">
+        <% @client.each_with_index do |place, i| %>
+            <a href="list/<%= place.place_id %>/<%= @transit_time[i] %>/info">
+                <div class="wrap_sento_card">
+                    <h2 class="sento_name"><%= place.name %></h2>
+                    <div class="sento_detail">
+                        <% if !place.photos[0].nil? %>
+                            <img src="<%= "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference="+place.photos[0].photo_reference+"&key="+ENV['API_KEY'] %>" class="wrap_sento_image"></img>
+                        <% else  %>
+                            <div class="wrap_sento_image"></div>
+                        <% end %>
+                        <div class="wrap_sento_text">
+                            <p class="ps-2rem bold">移動時間<br>- <span class="show_time"><%= @transit_time[i] %></span></p>
+                            <p class="ps-2rem bold">評価<br>- <span class=""><%= place.rating %></span></p>
+                            <% if !place.opening_hours.nil? %>
+                                <% if place.opening_hours["open_now"] == true %>
+                                    <p class="ps-1_75rem c-blue"><span class="bold">営業中</span>
+                                <% else %>
+                                    <p class="ps-1_75rem c-red"><span class="bold">営業時間外</span>
+                                <% end %>
+                            <% else %>
+                                <p class="ps-1_75rem "><span class="bold c-green">営業時間の記載なし</span>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        <% end %>
     </div>
-<% end %>
+</div>
 

@@ -1,6 +1,41 @@
-<div>
-    <h2>登録した銭湯</h2>
-    <h2>投稿した銭湯</h2>
-    <h2>お気に入り銭湯</h2>
-    <h2>いいねした投稿</h2>
+<div class="container">
+    <img src="assets/img/my_page.png" class="page_title"></img>
+    <h2 class="mypage_sub_title">登録した銭湯</h2>
+    <div class="wrap_sento_list">
+        <% @my_sentos.each_with_index do |sento, i| %>
+            <a href="mysento/<%= sento.id %>/<%= @my_sento_transit_time[i] %>/info">
+                <div class="wrap_sento_card">
+                    <h2 class="sento_name"><%= sento.name %></h2>
+                    <div class="sento_detail">
+                        <img src="<%= sento.img_url %>" class="wrap_sento_image"></img>
+                        <div class="wrap_sento_text">
+                            <p class="ps-1_75rem"><span class="bold">移動時間</span><br>- <%= @transit_time[i] %></p>
+                            <p class="ps-1_75rem"><span class="bold">費用</span><br>- <%= sento.cost %></p>
+                            <p class="ps-1_75rem"><span class="bold">コメント</span><br>- <%= sento.osusume %></p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        <% end %> 
+    </div>
+    <h2 class="mypage_sub_title">お気に入り銭湯</h2>
+    <div class="wrap_sento_list">
+        <% @like_sentos.each_with_index do |sento, i| %>
+            <a href="sento/<%= sento.id %>/<%= @transit_time[i] %>/info">
+                <div class="wrap_sento_card">
+                    <h2 class="sento_name"><%= sento.name %></h2>
+                    <div class="sento_detail">
+                        <img src="<%= sento.img_url %>" class="wrap_sento_image"></img>
+                        <div class="wrap_sento_text">
+                            <p class="ps-1_75rem"><span class="bold">移動時間</span><br>- <%= @transit_time[i] %></p>
+                            <p class="ps-1_75rem"><span class="bold">費用</span><br>- <%= sento.cost %></p>
+                            <p class="ps-1_75rem"><span class="bold">登録者のコメント</span><br>- <%= sento.osusume %></p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        <% end %>
+    </div>
+    <h2 class="mypage_sub_title">投稿した銭湯</h2>
+    <h2 class="mypage_sub_title">いいねした投稿</h2>
 </div>

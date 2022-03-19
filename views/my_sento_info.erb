@@ -1,0 +1,35 @@
+
+<div class="wrap_sento_info">
+    <h2 class="sento_info_name"><%= @spot.name %></h2>
+    <div class="wrap_sento_info_image">
+        <img src=<%= @url %> class="wrap_photo"></img>
+    </div>
+    <div class="sento_info_text_container">
+        <p id="left">移動時間</p><p><%= @transit_time %>（有料道路なしの場合）</p>
+    </div>
+    <div class="sento_info_text_container">
+        <p id="left">HP</p><p id="right"><a href="<%= @spot.website %>"><%= @spot.website %></a></p>
+    </div>
+    <div class="wrap_opening_hours">
+        <div id="left">
+            <p>営業時間</p>
+        </div>
+        <div id="right">
+            <% if !@spot.opening_hours["weekday_text"].nil? %>
+                <% @spot.opening_hours["weekday_text"].each do |hour| %>
+                    <p class="opening_hours_text"><%= hour %></p>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+    <div class="wrap_info_button">
+        <a href=<%= @maps_url %> target="_blank" rel="noopener noreferrer" class="wrap_go_button">
+            <input type='submit' name='submit' class="search_button" value='出発する' />
+        </a>
+        <% if @sento.user_id == session[:user] %>
+            <a href="/sento/<%= @sento.id %>/delete" class=" wrap_go_button">
+                <input type='submit' name='submit' class="search_button bg-grey" value='削除する' />
+            </a>
+        <% end %>
+    </div>
+</div>

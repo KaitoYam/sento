@@ -1,0 +1,49 @@
+
+<div class="wrap_sento_info">
+    <h2 class="sento_info_name"><%= @spot.name %></h2>
+    <div class="wrap_sento_info_image">
+        <img src=<%= @url %> class="wrap_photo"></img>
+    </div>
+    <div class="sento_info_text_container">
+        <p id="left">移動時間</p><p><%= @transit_time %>（有料道路なしの場合）</p>
+    </div>
+    <div class="sento_info_text_container">
+        <p id="left">HP</p><p id="right"><a href="<%= @spot.website %>"><%= @spot.website %></a></p>
+    </div>
+    <div class="wrap_opening_hours">
+        <div id="left">
+            <p>営業時間</p>
+        </div>
+        <div id="right">
+            <% if !@spot.opening_hours["weekday_text"].nil? %>
+                <% @spot.opening_hours["weekday_text"].each do |hour| %>
+                    <p class="opening_hours_text"><%= hour %></p>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+    <!--リンク元のHTMLリンク先は表示させたいエリアのid名を指定します。-->
+    <p class="text-align-center wrap_modal_open"><a href="#info" class="modal-open search_button">「<spna class="bold">みんなの銭湯</spna>」に追加する</a></p>
+    
+    <!--表示エリアのHTML。id 名にリンク先と同じ名前を指定します。※表示エリアはHTML の変更が可能なので、レイアウトを自由に変更できます。-->
+    <section id="info">
+        <form action='/sento/<%= current_user.id %>/add' method="post" class="display_center">
+            <% puts @spot.name %>
+            <input type="hidden" name="name" value="<%= @spot.name %>">
+            <input type="hidden" name="place_id" value=<%= @spot.place_id %>>
+            <input type="hidden" name="homepage_url" value="<%= @spot.website %>">
+            <input type="hidden" name="img_url" value="<%= @url %>">
+            <p class="send_title">ココが良い!!</p>
+            <input type="text" name="osusume" class="send_input"><br>
+            <p class="send_title">費用</p>
+            <select name="cost" class="send_input">
+                <option>~500円</option>
+                <option>500~1000円</option>
+                <option>1000~2000円</option>
+                <option>2000円~</option>
+            </select><br>
+            <input type='submit' name='submit' class="send_button" value='送信' />
+        </form>
+    </section>
+
+</div>
