@@ -13,9 +13,10 @@ helpers do
     def current_user
         User.find_by(id: session[:user])
     end
+    def add_sento_user
+        User.find_by(id: session[:user])
+    end
 end
-
-
 get '/' do
     # navigator.geolocation.getCurrnentPosition(function (position){
     #     LatLng = new gooel.maps.latLng(position.coords.latitude, position.coords.longitude);

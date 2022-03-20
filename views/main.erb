@@ -6,6 +6,7 @@
             <a href="sento/<%= sento.id %>/<%= @transit_time[i] %>/info">
                 <div class="wrap_sento_card">
                     <h2 class="sento_name"><%= sento.name %></h2>
+                    <p class="ps-2rem">登録者｜<%= sento.user.name %></p>
                     <% if sento.like_users.find_by(id: session[:user]) %>
                         <img class="like_icon" src="/assets/img/like_icon.png"></img>
                     <% else %>
