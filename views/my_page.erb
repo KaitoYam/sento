@@ -24,6 +24,7 @@
             <a href="sento/<%= sento.id %>/<%= @transit_time[i] %>/info">
                 <div class="wrap_sento_card">
                     <h2 class="sento_name"><%= sento.name %></h2>
+                    <p class="ps-2rem">登録者｜<%= sento.user.name %></p>
                     <div class="sento_detail">
                         <img src="<%= sento.img_url %>" class="wrap_sento_image"></img>
                         <div class="wrap_sento_text">
@@ -36,10 +37,10 @@
             </a>
         <% end %>
     </div>
-    <div class="mypage_sub_title">
+    <div class="wrap_sento_list">
         <h2 class="mypage_sub_title">投稿した銭湯</h2>
     </div>
-    <div class="mypage_sub_title">
+    <div class="wrap_sento_list">
         <h2 class="mypage_sub_title">いいねした投稿</h2>
     </div>
 </div>
