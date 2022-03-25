@@ -15,10 +15,8 @@ helpers do
     end
 end
 get '/' do
-    # navigator.geolocation.getCurrnentPosition(function (position){
-    #     LatLng = new gooel.maps.latLng(position.coords.latitude, position.coords.longitude);
-    #     p LatLng
-    # })
+    session[:lat] = 0
+    session[:lon] = 0
   erb :index
 end
 
@@ -47,12 +45,17 @@ end
 
 post '/login' do
     user = User.find_by(name: params[:name])
-    session[:lat] = params[:lat]
-    session[:lon] = params[:lon]
-     if user && user.authenticate(params[:password])
-         session[:user] = user.id
-         redirect '/main'
-     end
+    if params[:lat] == "" or params[:lon] == ""
+        session[:lat] = "35.6812362"
+        session[:lon] = "139.7649361"
+    else
+        session[:lat] = params[:lat]
+        session[:lon] = params[:lon]
+    end
+    if user && user.authenticate(params[:password])
+        session[:user] = user.id
+        redirect '/main'
+    end
     redirect '/'
 end
 
@@ -81,11 +84,13 @@ get '/main' do
         # photo = client.spot(c.place_id)
         # photo_urls.push(photo.photos[0].fetch_url(800))
         # puts c
+        puts session[:lat]
+        puts session[:lon]
         url = URI("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+session[:lat]+"%2C"+session[:lon]+"&destinations=place_id:"+sento.place_id+"&language=ja&avoid=tolls&key="+ENV['API_KEY'])
-        # url = URI("https://maps.googleapis.com/maps/api/distancematrix/json?origins="+session[:lat]+"%2C"+session[:lon]+"&destinations=place_id:"+c.place_id+"&key="+ENV['API_KEY'])
+        puts 33333
         https = Net::HTTP.new(url.host, url.port)
         https.use_ssl = true
-        
+        puts 44444
         request = Net::HTTP::Get.new(url)
         # puts request
         response = https.request(request)
