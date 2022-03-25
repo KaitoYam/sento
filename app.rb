@@ -38,6 +38,13 @@ post '/signup' do
         if user.persisted?
             session[:user] = user.id
         end
+        if params[:lat] == "" or params[:lon] == ""
+            session[:lat] = "35.6812362"
+            session[:lon] = "139.7649361"
+        else
+            session[:lat] = params[:lat]
+            session[:lon] = params[:lon]
+        end
         redirect '/main'
     end
     redirect '/signup'
